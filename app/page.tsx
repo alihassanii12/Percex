@@ -14,7 +14,7 @@ const cabinetGrotesk = localFont({
 const satoshi = localFont({
   src: [
     {
-      path: './fonts/Satoshi-Regular.woff2 ',
+      path: './fonts/Satoshi-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
