@@ -11,7 +11,7 @@
       }
     </style>
   </defs>
-  <rect class="cls-1" width="512" height="512"/>
+  <circle class="cls-1" cx="256" cy="256" r="256"/>
   <g>
     <polygon class="cls-2" points="406 114.39 356.46 220.6 301.1 220.6 329.56 114.39 406 114.39"/>
     <polygon class="cls-2" points="405.97 397.61 329.35 397.61 300.88 291.4 356.44 291.4 405.97 397.61"/>
