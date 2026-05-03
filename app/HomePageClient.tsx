@@ -26,7 +26,6 @@ import {
 } from './lib/seo';
 import { Layout } from './components/layout';
 import { Button } from './components/ui';
-import { TRUSTED_LOGOS } from './lib/constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -146,8 +145,6 @@ const TESTIMONIALS = [
   },
 ];
 
-const FALLBACK_LOGOS = ['Shopify', 'Stripe', 'Next.js', 'Klaviyo', 'Vercel', 'Algolia'];
-
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function HomePageClient() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -162,9 +159,7 @@ export default function HomePageClient() {
         .fromTo('.px-h-chip',  { opacity: 0, y: 14, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'back.out(1.5)' })
         .fromTo('.px-h-head',  { opacity: 0, y: 44 },              { opacity: 1, y: 0, duration: 0.7, stagger: 0.09 }, '-=0.25')
         .fromTo('.px-h-sub',   { opacity: 0, y: 22 },              { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
-        .fromTo('.px-h-cta',   { opacity: 0, y: 14 },              { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 }, '-=0.3')
-        .fromTo('.px-h-stat',  { opacity: 0, y: 12 },              { opacity: 1, y: 0, duration: 0.4, stagger: 0.06 }, '-=0.2')
-        .fromTo('.px-h-logos', { opacity: 0 },                     { opacity: 1, duration: 0.5 }, '-=0.15');
+        .fromTo('.px-h-cta',   { opacity: 0, y: 14 },              { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 }, '-=0.3');
 
       // ── Scroll reveals ──
       gsap.utils.toArray<HTMLElement>('.px-reveal').forEach((el) => {
@@ -206,7 +201,7 @@ export default function HomePageClient() {
 
       <style>{`
         /* hide until GSAP runs */
-        .px-h-chip,.px-h-head,.px-h-sub,.px-h-cta,.px-h-stat,.px-h-logos { opacity: 0; }
+        .px-h-chip,.px-h-head,.px-h-sub,.px-h-cta { opacity: 0; }
 
         /* marquee */
         @keyframes px-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
@@ -615,32 +610,42 @@ export default function HomePageClient() {
               ].map((benefit, i) => (
                 <div key={i} className="px-reveal group">
                   <div
-                    className="relative p-8 rounded-3xl border transition-all duration-500 hover:transform hover:scale-105 hover:border-blue-500/50 bg-white hover:shadow-xl"
+                    className="relative p-8 rounded-3xl border transition-all duration-500 hover:transform hover:scale-105 bg-white hover:shadow-2xl hover:border-blue-500/30"
                     style={{ borderColor: '#E2E8F0' }}
                   >
-                    {/* Blue gradient overlay on hover */}
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Dark navy background (same as CTA section) on hover */}
+                    <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: '#0B1120' }} />
+                    
+                    {/* Subtle blue glow overlay */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 via-transparent to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     {/* Icon with blue gradient background */}
                     <div className="relative mb-6 z-10">
                       <div
-                        className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg group-hover:shadow-xl transition-all duration-300 relative z-10"
+                        className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg group-hover:shadow-2xl group-hover:shadow-blue-500/50 transition-all duration-300 relative z-10"
                         style={{ color: '#fff' }}
                       >
                         {benefit.icon}
                       </div>
-                      {/* Blue glow effect - removed blur */}
-                      <div className="absolute inset-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 opacity-10 group-hover:opacity-20 transition-opacity duration-300" />
+                      {/* Blue glow effect */}
+                      <div className="absolute inset-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 opacity-10 group-hover:opacity-30 transition-opacity duration-300" />
                     </div>
                     
                     <h3
-                      className="font-bold text-xl mb-4 group-hover:text-blue-600 transition-colors duration-300 relative z-10"
-                      style={{ color: '#0B1120', letterSpacing: '-0.4px' }}
+                      className="font-bold text-xl mb-4 transition-colors duration-300 relative z-10"
+                      style={{ 
+                        color: '#0B1120', 
+                        letterSpacing: '-0.4px'
+                      }}
                     >
-                      {benefit.title}
+                      <span className="group-hover:text-white transition-colors duration-300">
+                        {benefit.title}
+                      </span>
                     </h3>
-                    <p className="font-satoshi text-base leading-relaxed group-hover:text-gray-700 transition-colors duration-300 relative z-10" style={{ color: '#64748B' }}>
-                      {benefit.desc}
+                    <p className="font-satoshi text-base leading-relaxed transition-colors duration-300 relative z-10" style={{ color: '#64748B' }}>
+                      <span className="group-hover:text-white transition-colors duration-300">
+                        {benefit.desc}
+                      </span>
                     </p>
 
                     {/* Bottom blue accent line */}
@@ -729,41 +734,6 @@ export default function HomePageClient() {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
-
-
-        {/* ════════════════════════════════════════════════════════
-            TRUSTED BY  —  light section
-        ════════════════════════════════════════════════════════ */}
-        <section
-          className="py-16 px-6 border-y"
-          style={{ background: '#F8FAFC', borderColor: '#E2E8F0' }}
-        >
-          <div className="max-w-5xl mx-auto text-center">
-            <p
-              className="px-reveal font-satoshi text-xs uppercase tracking-[.14em] mb-10"
-              style={{ color: '#94A3B8' }}
-            >
-              Trusted by growing businesses worldwide
-            </p>
-            <div className="px-stagger flex flex-wrap items-center justify-center gap-10">
-              {(Array.isArray(TRUSTED_LOGOS) && (TRUSTED_LOGOS as any)[0]?.src
-                ? TRUSTED_LOGOS
-                : FALLBACK_LOGOS
-              ).map((logo: any, i: number) => (
-                <div
-                  key={i}
-                  className="px-logo"
-                  style={{ opacity: 0.35 }}
-                >
-                  {typeof logo === 'string'
-                    ? <span className="font-cabinet-grotesk font-bold text-base" style={{ color: '#64748B' }}>{logo}</span>
-                    : <img src={logo.src} alt={logo.name ?? ''} className="h-7 w-auto" style={{ filter: 'grayscale(100%)' }} />
-                  }
-                </div>
-              ))}
             </div>
           </div>
         </section>
