@@ -1,7 +1,12 @@
 @import "tailwindcss";
 
-/* Percexa Brand Colors */
+/* Percexa Design System - Tailwind CSS v4 Configuration */
 @theme {
+  /* ========================================================================== */
+  /* Brand Color Palette */
+  /* ========================================================================== */
+  
+  /* Primary brand colors */
   --color-deep-navy: #0B1120;
   --color-slate-blue: #334155;
   --color-soft-gray: #E2E8F0;
@@ -9,14 +14,382 @@
   --color-electric-blue: #2563EB;
   --color-electric-blue-hover: #3B82F6;
   
-  /* Custom animation for slow gear rotation */
+  /* Semantic color mappings */
+  --color-primary: var(--color-electric-blue);
+  --color-primary-hover: var(--color-electric-blue-hover);
+  --color-background: var(--color-deep-navy);
+  --color-surface: var(--color-slate-blue);
+  --color-text-primary: var(--color-soft-gray);
+  --color-text-secondary: var(--color-muted-steel);
+  
+  /* State colors */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: var(--color-electric-blue);
+  
+  /* ========================================================================== */
+  /* Typography System */
+  /* ========================================================================== */
+  
+  /* Font families */
+  --font-heading: var(--font-cabinet-grotesk);
+  --font-body: var(--font-satoshi);
+  
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  
+  /* ========================================================================== */
+  /* Spacing and Layout */
+  /* ========================================================================== */
+  
+  /* Container sizes */
+  --size-container-sm: 640px;
+  --size-container-md: 768px;
+  --size-container-lg: 1024px;
+  --size-container-xl: 1280px;
+  --size-container-2xl: 1536px;
+  
+  /* Section spacing */
+  --space-section-xs: 2rem;    /* 32px */
+  --space-section-sm: 3rem;    /* 48px */
+  --space-section-md: 4rem;    /* 64px */
+  --space-section-lg: 6rem;    /* 96px */
+  --space-section-xl: 8rem;    /* 128px */
+  --space-section-2xl: 10rem;  /* 160px */
+  
+  /* Component spacing */
+  --space-component-xs: 0.5rem; /* 8px */
+  --space-component-sm: 1rem;   /* 16px */
+  --space-component-md: 1.5rem; /* 24px */
+  --space-component-lg: 2rem;   /* 32px */
+  --space-component-xl: 3rem;   /* 48px */
+  
+  /* ========================================================================== */
+  /* Border Radius */
+  /* ========================================================================== */
+  
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.375rem;  /* 6px */
+  --radius-lg: 0.5rem;    /* 8px */
+  --radius-xl: 0.75rem;   /* 12px */
+  --radius-2xl: 1rem;     /* 16px */
+  --radius-full: 9999px;
+  
+  /* ========================================================================== */
+  /* Shadows */
+  /* ========================================================================== */
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  
+  /* ========================================================================== */
+  /* Animations */
+  /* ========================================================================== */
+  
+  /* Duration */
+  --animate-duration-fast: 150ms;
+  --animate-duration-normal: 300ms;
+  --animate-duration-slow: 500ms;
+  
+  /* Easing */
+  --animate-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --animate-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --animate-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Custom animations */
   --animate-spin-slow: spin 8s linear infinite;
+  --animate-fade-in: fadeIn var(--animate-duration-normal) var(--animate-ease-out);
+  --animate-slide-up: slideUp var(--animate-duration-normal) var(--animate-ease-out);
+  
+  /* ========================================================================== */
+  /* Breakpoints */
+  /* ========================================================================== */
+  
+  --breakpoint-sm: 640px;   /* Mobile landscape */
+  --breakpoint-md: 768px;   /* Tablet portrait */
+  --breakpoint-lg: 1024px;  /* Tablet landscape */
+  --breakpoint-xl: 1280px;  /* Desktop */
+  --breakpoint-2xl: 1536px; /* Large desktop */
+  
+  /* ========================================================================== */
+  /* Z-Index Scale */
+  /* ========================================================================== */
+  
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
 }
 
-/* Font smoothing */
+/* ============================================================================ */
+/* Custom Keyframes */
+/* ============================================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================================================ */
+/* Base Styles */
+/* ============================================================================ */
+
 @layer base {
+  /* Font smoothing */
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Root element */
+  :root {
+    color-scheme: dark;
+  }
+  
+  /* Body defaults */
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-body), system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Heading defaults */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    color: var(--color-text-primary);
+  }
+  
+  /* Link defaults */
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--animate-duration-fast) var(--animate-ease-out);
+  }
+  
+  a:hover {
+    color: var(--color-primary-hover);
+  }
+  
+  /* Focus styles */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  
+  /* Selection styles */
+  ::selection {
+    background-color: var(--color-primary);
+    color: white;
+  }
+  
+  /* Scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-muted-steel);
+    border-radius: var(--radius-full);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
+}
+
+/* ============================================================================ */
+/* Component Utilities */
+/* ============================================================================ */
+
+@layer utilities {
+  /* Container utilities */
+  .container-sm {
+    max-width: var(--size-container-sm);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .container-md {
+    max-width: var(--size-container-md);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .container-lg {
+    max-width: var(--size-container-lg);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .container-xl {
+    max-width: var(--size-container-xl);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Section spacing utilities */
+  .section-spacing-sm {
+    padding-top: var(--space-section-sm);
+    padding-bottom: var(--space-section-sm);
+  }
+  
+  .section-spacing-md {
+    padding-top: var(--space-section-md);
+    padding-bottom: var(--space-section-md);
+  }
+  
+  .section-spacing-lg {
+    padding-top: var(--space-section-lg);
+    padding-bottom: var(--space-section-lg);
+  }
+  
+  .section-spacing-xl {
+    padding-top: var(--space-section-xl);
+    padding-bottom: var(--space-section-xl);
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: var(--animate-fade-in);
+  }
+  
+  .animate-slide-up {
+    animation: var(--animate-slide-up);
+  }
+  
+  .animate-spin-slow {
+    animation: var(--animate-spin-slow);
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(51, 65, 85, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 65, 85, 0.2);
+  }
+  
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--color-electric-blue), var(--color-electric-blue-hover));
+  }
+  
+  .gradient-surface {
+    background: linear-gradient(135deg, var(--color-slate-blue), var(--color-deep-navy));
+  }
+  
+  /* Accessibility utilities */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+  
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+  
+  /* Skip link styles */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--color-electric-blue);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: top 0.3s;
+  }
+  
+  .skip-link:focus {
+    top: 6px;
   }
 }
